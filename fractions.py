@@ -12,7 +12,10 @@ def gcd(m, n):
 # Implements: addition and equality
 # To do: multiplication, division, subtraction and comparison operators (< , >)
 class Fraction:
-    def __init__(self, top, bottom):
+    def __init__(self, top, bottom):  
+        if not (isinstance(top, int) and isinstance(bottom, int)):
+            raise RuntimeError("Arguments are wrong!")
+
         common = gcd(top, bottom)
         self.num = top // common
         self.den = bottom // common
@@ -71,7 +74,17 @@ class Fraction:
         new_den = self.den * other.num
         return new_num > new_den
 
-x = Fraction(1, 2)
+    def __le__(self, other):
+        new_num = self.num * other.den
+        new_den = self.den * other.num
+        return new_num <= new_den
+
+    def __ge__(self, other):
+        new_num = self.num * other.den
+        new_den = self.den * other.num
+        return new_num >= new_den
+
+x = Fraction("5", 6)
 y = Fraction(2, 3)
 print(x)
 print(y)
@@ -82,4 +95,5 @@ print(x / y)
 print(x == y)
 print(x < y)
 print(x > y)
-x.get_num()
+print(x <= y)
+print(x >= y)

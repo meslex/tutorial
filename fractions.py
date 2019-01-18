@@ -13,7 +13,7 @@ def gcd(m, n):
 # To do: multiplication, division, subtraction and comparison operators (< , >)
 class Fraction:
     def __init__(self, top, bottom):
-        common = (top, bottom)
+        common = gcd(top, bottom)
         self.num = top // common
         self.den = bottom // common
     
@@ -32,9 +32,10 @@ class Fraction:
     def __add__(self, other_fraction):
         new_num = self.num * other_fraction.den + \
         self.den * other_fraction.num
-        new_den = self.den * other_fraction.den
-        common = gcd(new_num, new_den)
-        return Fraction(new_num // common, new_den // common)
+        new_den = self.den * \
+         other_fraction.den
+        #common = gcd(new_num, new_den)
+        return Fraction(new_num, new_den)
 
 
     def __eq__(self, other):
@@ -72,6 +73,8 @@ class Fraction:
 
 x = Fraction(1, 2)
 y = Fraction(2, 3)
+print(x)
+print(y)
 print(x + y)
 print(x - y)
 print(x * y)
